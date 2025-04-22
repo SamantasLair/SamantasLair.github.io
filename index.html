@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --teal-primary: #20B2AA;
+            --teal-secondary: #5F9EA0;
+            --teal-dark: #008080;
+            --teal-light: #E0FFFF;
+            --teal-accent: #48D1CC;
+            --teal-pastel: #AFEEEE;
+        }
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar, footer {
+            background: linear-gradient(135deg, var(--teal-primary), var(--teal-dark)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-light .navbar-brand, .navbar-light .nav-link {
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+        .navbar-light .nav-link:hover {
+            color: var(--teal-light) !important;
+            transform: translateY(-2px);
+        }
+        .navbar-light .nav-link.active {
+            color: var(--teal-light) !important;
+            font-weight: bold;
+            position: relative;
+        }
+        .navbar-light .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--teal-light);
+            animation: navHighlight 0.5s ease-in-out;
+        }
+        @keyframes navHighlight {
+            0% { width: 0; left: 50%; }
+            100% { width: 100%; left: 0; }
+        }
+        .card {
+            border-color: var(--teal-secondary);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(to bottom right, white, var(--teal-light, #E0FFFF, 0.05));
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            border-color: var(--teal-accent);
+        }
+        .card-title {
+            color: var(--teal-dark);
+            transition: color 0.3s ease;
+        }
+        .card:hover .card-title {
+            color: var(--teal-accent);
+        }
+        a {
+            color: var(--teal-dark);
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            color: var(--teal-primary);
+            text-decoration: none;
+        }
+        footer {
+            color: white;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in, transform 0.8s ease-out;
+        }
+        .typing-effect::after {
+            content: "|";
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.5s ease;
+        }
+        .nav-item:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">About Me</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="education.html">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="music-taste.html">Music Taste</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="skills.html">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="mb-4 typing-effect">Selamat Datang di Website UTP saya</h1>
+                <div class="card mb-4 fade-in">
+                    <div class="card-body">
+                        <h2 class="card-title">About Me</h2>
+                        <p class="card-text">
+                            Nama saya Samuel Ananta Sinulingga, dengan NPM 2317051089. Hobi saya bermain catur, mendengarkan musik, dan tidur.
+                        </p>
+                        <p class="card-text">
+                            Dan juga sebelum saya melakukan koding saya membaca mantra untuk menghilangkan serangga, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus temporibus ratione laborum libero quia. Accusantium sunt iure nisi, tenetur amet officia. Illum distinctio deleniti consequuntur rerum excepturi ullam maiores nulla.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card fade-in">
+                    <div class="card-body">
+                        <h2 class="card-title">Personal Statement</h2>
+                        <p class="card-text">
+                            Buat orang orang yang pernah nawarin MLM sini gelut ama saya.
+                        </p>
+                        <p class="card-text">
+                            Tempe > Tahu, Bubur itu dimakan make sendok.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-3 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025 All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const heading = document.querySelector('.typing-effect');
+        const text = heading.textContent;
+        heading.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                heading.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            typeWriter();
+            
+            const fadeElements = document.querySelectorAll('.fade-in');
+            setTimeout(() => {
+                fadeElements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.style.opacity = 1;
+                        element.style.transform = 'translateY(0)';
+                    }, index * 300);
+                });
+            }, 500);
+
+            // Navbar animation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        item.style.transform = 'translateY(0)';
+                    }, 200);
+                }, 200 + (index * 100));
+            });
+        });
+    </script>
+</body>
+</html>

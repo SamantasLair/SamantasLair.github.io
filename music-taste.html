@@ -59,7 +59,8 @@
             background: linear-gradient(to bottom right, white, var(--teal-light, #E0FFFF, 0.05));
         }
         .card:hover {
-            transform: translateY(-5px);
+            transition: transform 0.8s ease-in-out, box-shadow 0.4s ease-in-out;
+            transform: scale(1.08) translateY(-10px) !important;
             box-shadow: 0 12px 24px rgba(0,0,0,0.15);
             border-color: var(--teal-accent);
         }
@@ -251,7 +252,6 @@
                 }, 1500 + (index * 200));
             });
 
-            // Navbar animation
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach((item, index) => {
                 setTimeout(() => {

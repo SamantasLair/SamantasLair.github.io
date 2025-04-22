@@ -50,6 +50,7 @@
             0% { width: 0; left: 50%; }
             100% { width: 100%; left: 0; }
         }
+        
         .card {
             border-color: var(--teal-secondary);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -60,16 +61,17 @@
             background: linear-gradient(to bottom right, white, var(--teal-light, #E0FFFF, 0.05));
         }
         .card:hover {
-            transform: translateY(-5px);
+            transition: transform 0.8s ease-in-out, box-shadow 0.4s ease-in-out;
+            transform: scale(1.08) translateY(-10px) !important;
             box-shadow: 0 12px 24px rgba(0,0,0,0.15);
             border-color: var(--teal-accent);
+        }
+        .card:hover .card-title {
+            color: var(--teal-accent);
         }
         .card-title {
             color: var(--teal-dark);
             transition: color 0.3s ease;
-        }
-        .card:hover .card-title {
-            color: var(--teal-accent);
         }
         a {
             color: var(--teal-dark);

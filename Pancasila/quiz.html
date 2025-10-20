@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mulai Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="quiz-container">
+            <div id="progress-bar">
+                <div id="progress-bar-full"></div>
+            </div>
+            <h2 id="question-title">Memuat Pertanyaan...</h2>
+            <div id="options-container">
+            </div>
+            <button id="next-btn" class="btn hidden">Selanjutnya</button>
+        </div>
+
+        <div id="result-container" class="hidden">
+            <h2>Quiz Selesai!</h2>
+            <p>Skor Anda:</p>
+            <h1 id="score-text">0 / 0</h1>
+            <a href="index.html" class="btn">Kembali ke Beranda</a>
+        </div>
+    </div>
+    
+    <script src="quiz-script.js"></script>
+</body>
+</html>

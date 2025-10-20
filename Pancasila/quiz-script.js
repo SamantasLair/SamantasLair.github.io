@@ -105,7 +105,7 @@ function showResults() {
     resultContainer.classList.remove('hidden');
     
     const pointsEarned = score * 10;
-    scoreText.innerText = `Skor Kuis Ini: ${pointsEarned} Poin`;
+    scoreText.innerText = `${pointsEarned} Poin`;
     
     saveGlobalScore(pointsEarned);
 }

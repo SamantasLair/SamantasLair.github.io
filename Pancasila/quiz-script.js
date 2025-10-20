@@ -58,14 +58,27 @@ function startQuiz() {
 function showQuestion() {
     resetState();
     const question = quizData[currentQuestionIndex];
+
+    // ANIMASI: Hapus kelas animasi sebelumnya dan paksa reflow
+    questionTitle.classList.remove('anim-fade-in-up');
+    void questionTitle.offsetWidth;
+
+    // Set konten dan tambahkan kelas animasi
     questionTitle.innerText = question.question;
+    questionTitle.classList.add('anim-fade-in-up');
     
     updateProgressBar();
 
-    question.options.forEach(option => {
+    question.options.forEach((option, index) => {
         const button = document.createElement('button');
         button.innerText = option;
         button.classList.add('option-btn');
+        
+        // ANIMASI: Tambahkan kelas animasi ke setiap tombol
+        button.classList.add('anim-fade-in-up');
+        // Atur penundaan animasi agar muncul satu per satu
+        button.style.animationDelay = `${0.3 + index * 0.1}s`; 
+        
         button.addEventListener('click', () => selectAnswer(button, option));
         optionsContainer.appendChild(button);
     });
@@ -73,6 +86,7 @@ function showQuestion() {
 
 function resetState() {
     nextBtn.classList.add('hidden');
+    // Hapus semua tombol opsi (yang memiliki kelas animasi)
     while (optionsContainer.firstChild) {
         optionsContainer.removeChild(optionsContainer.firstChild);
     }
@@ -95,6 +109,8 @@ function selectAnswer(button, selectedOption) {
             }
         }
         btn.disabled = true;
+        // Hapus animasi agar tidak berkedip saat memilih
+        btn.classList.remove('anim-fade-in-up'); 
     });
 
     nextBtn.classList.remove('hidden');

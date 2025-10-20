@@ -3,38 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Edukasi Pancasila</title>
+    <title>Inovasi Pembelajaran Pancasila</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Garuda_Pancasila_vector.svg" alt="Garuda Pancasila" class="logo">
-                <h1>Quiz Edukasi Pancasila</h1>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Garuda_Pancasila_vector.svg" alt="Logo Garuda" class="logo-nav">
+                <span>Inovasi Pancasila</span>
             </div>
-            
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="container">
+            <h1>Platform Edukasi Nilai-Nilai Pancasila</h1>
+            <p class="hero-subtitle">Sebuah prototipe inovasi untuk memperkuat pemahaman dan penerapan dasar negara melalui pembelajaran interaktif.</p>
+        </div>
+    </header>
+
+    <section class="skor-section">
+        <div class="container">
             <div class="skor-global-container">
-                POIN PRESTASI: <span id="skor-global-text">0</span>
-                <button id="reset-skor-btn" class="btn-kecil">Reset Skor</button>
+                <div class="skor-label">POIN PRESTASI ANDA</div>
+                <div id="skor-global-text">0</div>
+                <button id="reset-skor-btn" class="btn-kecil">Reset Poin</button>
             </div>
-            
-            <p>Uji pemahamanmu tentang dasar negara kita. Silakan pilih paket soal di bawah ini untuk memulai.</p>
-        </header>
+        </div>
+    </section>
+
+    <main class="container paket-section">
+        <h2>Pilih Modul Pembelajaran</h2>
+        <p class="paket-subtitle">Selesaikan setiap modul untuk mendapatkan poin dan membuka pemahaman baru.</p>
         
-        <main>
-            <h2>Pilih Paket Soal</h2>
-            <div id="paket-list" class="paket-container">
+        <div id="paket-list" class="paket-container">
             </div>
 
-            <div id="pagination-controls" class="pagination-controls">
-                <button id="prev-btn" class="btn">Sebelumnya</button>
-                <span id="page-info">Halaman 1 / 1</span>
-                <button id="next-btn" class="btn">Selanjutnya</button>
-            </div>
+        <div id="pagination-controls" class="pagination-controls">
+            <button id="prev-btn" class="btn">Sebelumnya</button>
+            <span id="page-info">Halaman 1 / 1</span>
+            <button id="next-btn" class="btn">Selanjutnya</button>
+        </div>
+    </main>
 
-        </main>
-    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 - Prototipe Inovasi Pancasila. Dibuat sebagai bagian dari kontribusi untuk masyarakat.</p>
+        </div>
+    </footer>
 
     <script src="Data/semua-paket.js"></script>
     <script src="script.js"></script>

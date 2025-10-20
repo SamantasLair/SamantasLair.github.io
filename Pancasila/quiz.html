@@ -3,29 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mulai Quiz - Edukasi Pancasila</title>
+    <title>Mulai Modul - Edukasi Pancasila</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        
-        <header class="quiz-header">
-            <h1>Quiz Edukasi Pancasila</h1>
-        </header>
-        
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Garuda_Pancasila_vector.svg" alt="Logo Garuda" class="logo-nav">
+                <span>Modul Pembelajaran</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-quiz">
         <div id="quiz-container">
             <div id="progress-bar">
                 <div id="progress-bar-full"></div>
             </div>
+            
             <h2 id="question-title">Memuat Pertanyaan...</h2>
+            
             <div id="options-container">
             </div>
-            <button id="next-btn" class="btn hidden">Selanjutnya</Gbutton>
+            
+            <button id="next-btn" class="btn hidden">Selanjutnya</button>
         </div>
 
         <div id="result-container" class="hidden">
-            <h2>Quiz Selesai!</h2>
-            <p>Poin yang Diperoleh:</p>
+            <h2>Modul Selesai!</h2>
+            <p>Poin yang Anda Peroleh:</p>
             <h1 id="score-text">0 Poin</h1>
             <a href="index.html" class="btn">Kembali ke Beranda</a>
         </div>

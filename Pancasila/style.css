@@ -4,12 +4,11 @@
     --merah-gelap: #B30000;
     --putih-utama: #FFFFFF;
     --latar-abu: #f4f7f6;
-    --teks-hitam: #212529; /* Warna navbar atas */
+    --teks-hitam: #212529;
     --teks-abu: #6c757d;
     --teks-putih: #f8f9fa;
     --emas-garuda: #FFD700;
     --hijau-benar: #28a745;
-    --biru-poin: #007bff;
     --font-utama: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -31,9 +30,9 @@ body {
     padding: 0 20px;
 }
 
-/* --- 1. NAVBAR ATAS BARU --- */
+/* --- 1. NAVBAR (TEMA MERAH-PUTIH) --- */
 .navbar-top {
-    background-color: var(--teks-hitam);
+    background-image: linear-gradient(to right, var(--merah-utama) 0%, var(--merah-gelap) 100%);
     color: var(--teks-putih);
     padding: 12px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -65,13 +64,14 @@ body {
 .skor-label {
     font-size: 0.9rem;
     font-weight: 500;
-    color: #adb5bd; /* Abu-abu muda agar tidak terlalu mencolok */
+    color: #f8f9fa;
+    opacity: 0.8;
 }
 #skor-global-text {
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--putih-utama);
-    background-color: var(--biru-poin); /* Biru seperti di referensi */
+    color: var(--merah-utama);
+    background-color: var(--putih-utama);
     padding: 5px 12px;
     border-radius: 8px;
     min-width: 30px;
@@ -81,15 +81,15 @@ body {
     padding: 6px 10px;
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--teks-hitam);
-    background-color: #e9ecef;
-    border: 1px solid #ced4da;
+    color: var(--merah-utama);
+    background-color: var(--putih-utama);
+    border: 1px solid #f8f9fa;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
 }
 .btn-kecil:hover {
-    background-color: #dee2e6;
+    background-color: #f0f0f0;
 }
 
 /* --- 3. HERO SECTION --- */
@@ -115,7 +115,7 @@ body {
 /* --- 4. PAKET SECTION & KARTU --- */
 .paket-section {
     padding-top: 40px;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 }
 .paket-section h2 {
     font-size: 2rem;
@@ -132,25 +132,15 @@ body {
     margin-bottom: 40px;
 }
 
+/* GRID UTAMA (4x3) */
 .paket-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 25px;
-    min-height: 200px;
+    min-height: auto;
 }
 
-/* PESAN JIKA SEMUA SELESAI */
-.pesan-selesai {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--teks-abu);
-    text-align: center;
-    padding: 50px 20px;
-    background-color: var(--putih-utama);
-    border-radius: 12px;
-    border: 2px dashed #dee2e6;
-}
-
+/* KARTU PAKET (Berlaku untuk grid & carousel) */
 .paket-card {
     border: 1px solid #dee2e6;
     border-radius: 12px;
@@ -164,6 +154,9 @@ body {
     position: relative;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     border-left: 5px solid var(--merah-utama);
+    /* Untuk carousel */
+    width: 300px; 
+    flex-shrink: 0;
 }
 
 .paket-card:hover {
@@ -185,13 +178,71 @@ body {
     color: var(--teks-abu);
     flex-grow: 1;
     line-height: 1.5;
+    white-space: normal;
 }
 
-/* Kartu Selesai (Tidak digunakan lagi, karena disembunyikan) */
+/* GAYA KARTU "SELESAI" */
 .paket-card.selesai {
-    display: none; 
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    border-left-color: var(--hijau-benar);
+    cursor: not-allowed;
+    opacity: 0.8;
 }
 
+.paket-card.selesai:hover {
+    transform: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.paket-card.selesai::after {
+    content: '✓ Selesai';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background-color: var(--hijau-benar);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 0 10px 0 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* --- SECTION RECOMMENDED (CAROUSEL) --- */
+.horizontal-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 25px;
+    padding: 10px 5px 20px 5px; /* Padding untuk scrollbar */
+    min-height: 200px; /* Tinggi minimum jika kosong */
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 40px;
+}
+/* Sembunyikan scrollbar di Chrome/Safari */
+.horizontal-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+.horizontal-scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* PESAN CONGRATS */
+.congrats-message {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--hijau-benar);
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f6fff8;
+    border-radius: 12px;
+    border: 2px dashed var(--hijau-benar);
+}
 
 /* --- 5. FOOTER --- */
 .footer {

@@ -128,7 +128,6 @@ const quizPackages = [
             }
         ]
     },
-    // --- Kategori: Lambang & Sila ---
     {
         id: "paket5",
         title: "Lambang dan Sila",
@@ -353,7 +352,6 @@ const quizPackages = [
             }
         ]
     },
-    // --- Kategori: Penerapan & Nilai ---
     {
         id: "paket12",
         title: "Pancasila sebagai Ideologi",
@@ -482,7 +480,6 @@ const quizPackages = [
             }
         ]
     },
-    // --- Kategori: Sejarah Lanjutan & Tantangan ---
     {
         id: "paket16",
         title: "Hari Lahir Pancasila",
@@ -579,7 +576,6 @@ const quizPackages = [
             }
         ]
     },
-    // --- Kategori: Soal Campuran ---
     {
         id: "paket19",
         title: "Soal Campuran (Mudah)",

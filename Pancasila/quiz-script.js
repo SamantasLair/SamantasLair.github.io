@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    const completed = JSON.parse(localStorage.getItem('pancasilaCompletedQuizzes') || '[]');
+    if (completed.includes(quizId)) {
+        alert('Anda sudah menyelesaikan paket soal ini!');
+        window.location.href = 'index.html';
+        return;
+    }
+
     if (typeof quizPackages === 'undefined') {
         questionTitle.innerText = 'Gagal memuat data paket soal. Silakan kembali.';
         return;
@@ -29,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let currentQuestionIndex = 0;
 let score = 0;
-let quizData = []; 
+let quizData = [];
+
 const questionTitle = document.getElementById('question-title');
 const optionsContainer = document.getElementById('options-container');
 const nextBtn = document.getElementById('next-btn');
@@ -52,7 +60,8 @@ function showQuestion() {
     const question = quizData[currentQuestionIndex];
     questionTitle.innerText = question.question;
     
-    updateProgressBar(); 
+    updateProgressBar();
+
     question.options.forEach(option => {
         const button = document.createElement('button');
         button.innerText = option;
@@ -63,7 +72,7 @@ function showQuestion() {
 }
 
 function resetState() {
-    nextBtn.classList.add('hidden'); 
+    nextBtn.classList.add('hidden');
     while (optionsContainer.firstChild) {
         optionsContainer.removeChild(optionsContainer.firstChild);
     }
@@ -73,28 +82,46 @@ function selectAnswer(button, selectedOption) {
     const correct = selectedOption === quizData[currentQuestionIndex].answer;
 
     if (correct) {
-        button.classList.add('correct'); 
+        button.classList.add('correct');
         score++;
     } else {
-        button.classList.add('incorrect'); 
+        button.classList.add('incorrect');
     }
 
     Array.from(optionsContainer.children).forEach(btn => {
         if (btn.innerText === quizData[currentQuestionIndex].answer) {
             if (!correct) {
-                btn.classList.add('correct'); 
+                btn.classList.add('correct');
             }
         }
-        btn.disabled = true; 
+        btn.disabled = true;
     });
 
-    nextBtn.classList.remove('hidden'); 
+    nextBtn.classList.remove('hidden');
 }
 
 function showResults() {
     quizContainer.classList.add('hidden');
     resultContainer.classList.remove('hidden');
-    scoreText.innerText = `${score} / ${quizData.length}`;
+    
+    const pointsEarned = score * 10;
+    scoreText.innerText = `Skor Kuis Ini: ${pointsEarned} Poin`;
+    
+    saveGlobalScore(pointsEarned);
+}
+
+function saveGlobalScore(pointsEarned) {
+    const currentTotalScore = Number(localStorage.getItem('pancasilaGameScore') || 0);
+    const newTotalScore = currentTotalScore + pointsEarned;
+    localStorage.setItem('pancasilaGameScore', newTotalScore);
+    
+    const quizId = sessionStorage.getItem('selectedQuizId');
+    const completed = JSON.parse(localStorage.getItem('pancasilaCompletedQuizzes') || '[]');
+    
+    if (quizId && !completed.includes(quizId)) {
+        completed.push(quizId);
+        localStorage.setItem('pancasilaCompletedQuizzes', JSON.stringify(completed));
+    }
 }
 
 function updateProgressBar() {

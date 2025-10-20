@@ -1,17 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const quizFile = sessionStorage.getItem('selectedQuizFile');
+    // Ambil quizId yang disimpan dari halaman index
+    const quizId = sessionStorage.getItem('selectedQuizId');
 
-    if (!quizFile) {
+    if (!quizId) {
+        // Jika tidak ada id, kembali ke index
         window.location.href = 'index.html';
         return;
     }
 
-    loadQuizData(quizFile);
+    // Pastikan quizPackages (dari semua-paket.js) sudah dimuat
+    if (typeof quizPackages === 'undefined') {
+        questionTitle.innerText = 'Gagal memuat data paket soal. Silakan kembali.';
+        return;
+    }
+
+    // Cari paket soal yang sesuai berdasarkan id
+    const selectedPackage = quizPackages.find(p => p.id === quizId);
+
+    if (!selectedPackage) {
+        questionTitle.innerText = 'Paket soal tidak ditemukan. Silakan kembali.';
+        return;
+    }
+    
+    // Set data kuis global dari array 'soal' di dalam paket yang dipilih
+    quizData = selectedPackage.soal; 
+    
+    if (quizData && quizData.length > 0) {
+        startQuiz();
+    } else {
+        questionTitle.innerText = 'Paket soal ini kosong. Silakan kembali.';
+    }
 });
 
 let currentQuestionIndex = 0;
 let score = 0;
-let quizData = [];
+let quizData = []; // Ini akan diisi oleh listener DOMContentLoaded
 
 const questionTitle = document.getElementById('question-title');
 const optionsContainer = document.getElementById('options-container');
@@ -21,25 +44,7 @@ const resultContainer = document.getElementById('result-container');
 const scoreText = document.getElementById('score-text');
 const progressBar = document.getElementById('progress-bar-full');
 
-function loadQuizData(file) {
-    const script = document.createElement('script');
-    script.src = file;
-    
-    script.onload = () => {
-        if (typeof questions !== 'undefined') {
-            quizData = questions;
-            startQuiz();
-        } else {
-            questionTitle.innerText = 'Gagal memuat soal. Silakan kembali.';
-        }
-    };
-    
-    script.onerror = () => {
-        questionTitle.innerText = 'File soal tidak ditemukan. Silakan kembali.';
-    };
-
-    document.body.appendChild(script);
-}
+// Fungsi loadQuizData() sudah tidak diperlukan lagi
 
 function startQuiz() {
     currentQuestionIndex = 0;

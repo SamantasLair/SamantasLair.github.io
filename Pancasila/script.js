@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>${paket.title}</h3>
                 <p>${paket.description}</p>
             `;
-            card.addEventListener('click', () => selectPaket(paket.file));
+            card.addEventListener('click', () => selectPaket(paket.id));
             paketListContainer.appendChild(card);
         });
     }
 });
 
-function selectPaket(paketFile) {
-    sessionStorage.setItem('selectedQuizFile', paketFile);
+function selectPaket(paketId) { 
+    sessionStorage.setItem('selectedQuizId', paketId);
     window.location.href = 'quiz.html';
 }

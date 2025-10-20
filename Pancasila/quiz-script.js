@@ -87,19 +87,17 @@ function showQuestion() {
     resetState();
     const question = quizData[currentQuestionIndex];
 
-    // Animasi masuk (jika ada kelas .anim-fade-in-up di CSS)
-    questionTitle.classList.remove('anim-fade-in-up');
+    questionTitle.classList.remove('anim-fade-in');
     void questionTitle.offsetWidth; 
     questionTitle.textContent = question.question;
-    questionTitle.classList.add('anim-fade-in-up');
+    questionTitle.classList.add('anim-fade-in');
     
     updateProgressBar();
 
     // Buat Tombol Opsi dengan class Bootstrap & Tailwind
     question.options.forEach((option, index) => {
         const button = document.createElement('button');
-        // Gunakan btn-lg untuk tombol lebih besar, btn-outline-secondary untuk tampilan awal
-        button.className = 'btn btn-lg btn-outline-secondary w-100 text-start p-3 anim-fade-in-up'; 
+        button.className = 'btn btn-lg btn-outline-secondary w-100 text-start p-3 anim-fade-in'; 
         button.textContent = option;
         
         button.style.animationDelay = `${0.3 + index * 0.1}s`; 
@@ -122,7 +120,7 @@ function selectAnswer(button, selectedOption) {
     // Nonaktifkan semua tombol dan hapus class outline
     Array.from(optionsContainer.children).forEach(btn => {
         btn.disabled = true;
-        btn.classList.remove('btn-outline-secondary', 'anim-fade-in-up'); // Hapus outline dan animasi
+        btn.classList.remove('btn-outline-secondary', 'anim-fade-in'); // Hapus outline dan animasi
         btn.classList.add('disabled'); // Tambah class disabled Bootstrap
 
         // Beri warna berdasarkan jawaban

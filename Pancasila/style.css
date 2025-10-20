@@ -1,19 +1,14 @@
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
-    100% {
-        transform: translateX(-50%);
+    to {
+        opacity: 1;
     }
 }
 
-.horizontal-scroll-container.animate {
-    animation: scroll 60s linear infinite;
-}
-
-.horizontal-scroll-container:hover {
-    animation-play-state: paused;
+.anim-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
 }
 
 body {

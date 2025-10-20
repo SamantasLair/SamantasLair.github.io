@@ -4,18 +4,23 @@ let currentPage = 1;
 const itemsPerPage = 12; // 4x3 grid
 let totalPages = 1;
 
-// Elemen Halaman Utama
+// ---
+let recommendedPool = []; 
+let currentRecommended = []; 
+let recommendationInterval; 
+
+// ---
 const paketListContainer = document.getElementById('paket-list');
 const paginationControls = document.getElementById('pagination-controls');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const pageInfo = document.getElementById('page-info');
 
-// Elemen Skor
+// ---
 const skorGlobalText = document.getElementById('skor-global-text');
 const resetSkorBtn = document.getElementById('reset-skor-btn');
 
-// Elemen Recommended Baru
+// ---
 const recommendedSection = document.getElementById('recommended-section');
 const recommendedList = document.getElementById('recommended-list');
 
@@ -24,7 +29,7 @@ const recommendedList = document.getElementById('recommended-list');
 document.addEventListener('DOMContentLoaded', () => {
     
     loadGlobalScore();
-    resetSkorBtn.addEventListener('click', confirmResetGlobalScore); // Gunakan konfirmasi
+    resetSkorBtn.addEventListener('click', confirmResetGlobalScore); 
 
     if (typeof quizPackages === 'undefined' || quizPackages.length === 0) {
         paketListContainer.innerHTML = '<div class="col-12"><p class="text-center text-gray-500 my-5">Belum ada modul pembelajaran yang tersedia.</p></div>';
@@ -35,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const completed = JSON.parse(localStorage.getItem('pancasilaCompletedQuizzes') || '[]');
     
-    setupRecommendedCarousel(quizPackages, completed);
+    setupDynamicRecommendations(quizPackages, completed);
 
     allPackages = quizPackages; 
     totalPages = Math.ceil(allPackages.length / itemsPerPage);
@@ -59,58 +64,81 @@ function shuffle(array) {
     return array;
 }
 
-// --- Fungsi Setup Carousel ---
-function setupRecommendedCarousel(allPackages, completed) {
+// --- Fungsi Setup Carousel Dinamis ---
+function setupDynamicRecommendations(allPackages, completed) {
     const incompletePackages = allPackages.filter(paket => !completed.includes(paket.id));
-    
-    recommendedList.innerHTML = ''; 
-    
-    if (incompletePackages.length > 0) {
-        let recommendedPackages = shuffle([...incompletePackages]).slice(0, 6); // Salin array sebelum shuffle
+    recommendedList.innerHTML = '';
 
-        if (recommendedPackages.length === 0) { // Jika setelah slice jadi 0 (kasus aneh)
-             recommendedSection.innerHTML = '<div class="text-center text-gray-500 py-5">🎉 Selamat! Anda telah menyelesaikan semua modul.</div>';
-             return;
-        }
-
-        recommendedPackages.forEach(paket => {
-            const card = createPackageCard(paket, false); 
-            recommendedList.appendChild(card);
-        });
-
-        // Duplikasi hanya jika lebih dari ~3 kartu agar cukup untuk loop
-        if (recommendedPackages.length > 3) { 
-            recommendedPackages.forEach(paket => {
-                const cardClone = createPackageCard(paket, false);
-                cardClone.classList.add('clone'); // Tandai klon jika perlu
-                recommendedList.appendChild(cardClone);
-            });
-            
-            recommendedList.classList.add('animate');
-            // Durasi: Sesuaikan kecepatan di sini (misal: 10 detik per kartu)
-            const duration = recommendedPackages.length * 10; 
-            recommendedList.style.animationDuration = `${duration}s`;
-        } else {
-            // Jika kartu sedikit, jangan animasikan loop, cukup biarkan scroll
-             recommendedList.parentElement.classList.add('overflow-x-auto');
-        }
-
-    } else {
-        recommendedSection.innerHTML = '<div class="text-center text-green-600 font-semibold py-5 text-lg">🎉 Selamat! Anda telah menyelesaikan semua modul.</div>';
+    if (incompletePackages.length === 0) {
+        recommendedSection.innerHTML = '<div class="text-center text-green-600 font-semibold py-5 text-lg w-100">🎉 Selamat! Anda telah menyelesaikan semua modul.</div>';
+        return;
     }
+
+    recommendedPool = shuffle(incompletePackages);
+    currentRecommended = recommendedPool.splice(0, 3);
+    
+    displayCurrentRecommended();
+
+    if (recommendedPool.length > 0 || currentRecommended.length > 0) {
+        recommendationInterval = setInterval(updateRecommended, 5000); // Diubah ke 5 detik
+    }
+}
+
+function displayCurrentRecommended() {
+    recommendedList.innerHTML = ''; 
+    currentRecommended.forEach((paket, index) => {
+        const card = createPackageCard(paket, false, true); 
+        card.classList.add('anim-fade-in'); // Ganti animasi
+        card.style.animationDelay = `${index * 0.1}s`;
+        recommendedList.appendChild(card);
+    });
+}
+
+function updateRecommended() {
+    if (currentRecommended.length === 0) {
+        clearInterval(recommendationInterval);
+        return;
+    }
+
+    if (recommendedPool.length === 0) {
+        const completed = JSON.parse(localStorage.getItem('pancasilaCompletedQuizzes') || '[]');
+        const allIncomplete = quizPackages.filter(p => !completed.includes(p.id));
+        
+        const currentIds = currentRecommended.map(p => p.id);
+        recommendedPool = shuffle(allIncomplete.filter(p => !currentIds.includes(p.id)));
+
+        if (recommendedPool.length === 0) {
+            clearInterval(recommendationInterval);
+            return; 
+        }
+    }
+
+    const newItem = recommendedPool.shift();
+    
+    const removedIndex = Math.floor(Math.random() * currentRecommended.length);
+    const removedItem = currentRecommended.splice(removedIndex, 1)[0];
+    
+    if(removedItem) {
+        recommendedPool.push(removedItem); 
+    }
+
+    if(newItem) {
+        currentRecommended.push(newItem);
+    }
+    
+    displayCurrentRecommended();
 }
 
 
 // --- Fungsi Helper Pembuat Kartu ---
-function createPackageCard(paket, isCompleted) {
+function createPackageCard(paket, isCompleted, isCarousel = false) {
     const cardWrapper = document.createElement('div');
-    // Untuk grid utama, gunakan kolom Bootstrap
-    if (!recommendedList.contains(paketListContainer)) { // Cek jika bukan di carousel
+    
+    if (!isCarousel) {
          cardWrapper.className = 'col-12 col-md-6 col-lg-3 mb-4 d-flex'; // Kolom Bootstrap
     }
 
     const card = document.createElement('div');
-    // Tailwind classes for card styling
     card.className = `card h-100 border-l-4 ${isCompleted ? 'border-green-500 bg-gray-50' : 'border-red-600 hover:shadow-lg transition duration-200'} flex-grow-1`; 
     card.style.cursor = isCompleted ? 'not-allowed' : 'pointer';
 
@@ -128,12 +156,10 @@ function createPackageCard(paket, isCompleted) {
          card.style.opacity = '0.8';
     }
 
-    // Jika bukan carousel, masukkan card ke wrapper kolom Bootstrap
-    if (!recommendedList.contains(paketListContainer)) {
+    if (!isCarousel) {
         cardWrapper.appendChild(card);
         return cardWrapper;
     } else {
-        // Jika carousel, kembalikan card langsung (karena flexbox)
         card.classList.add('w-72', 'flex-shrink-0'); // Tailwind width for carousel items
         return card;
     }
@@ -145,15 +171,13 @@ function displayPackagesForPage() {
     paketListContainer.innerHTML = '';
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    // Gunakan quizPackages asli untuk pagination, karena allPackages bisa berubah (carousel)
     const packagesToShow = quizPackages.slice(startIndex, endIndex); 
 
     const completed = JSON.parse(localStorage.getItem('pancasilaCompletedQuizzes') || '[]');
 
     packagesToShow.forEach(paket => {
         const isCompleted = completed.includes(paket.id);
-        // Buat card dalam wrapper kolom Bootstrap
-        const cardElement = createPackageCard(paket, isCompleted); 
+        const cardElement = createPackageCard(paket, isCompleted, false); 
         paketListContainer.appendChild(cardElement);
     });
 }
@@ -164,9 +188,9 @@ function updatePaginationControls() {
     nextBtn.disabled = (currentPage === totalPages);
 
     if (totalPages <= 1) {
-        paginationControls.classList.add('d-none'); // Bootstrap class
+        paginationControls.classList.add('d-none'); 
     } else {
-        paginationControls.classList.remove('d-none'); // Bootstrap class
+        paginationControls.classList.remove('d-none'); 
     }
 }
 
@@ -198,15 +222,14 @@ function loadGlobalScore() {
     skorGlobalText.textContent = totalScore;
 }
 
-// Konfirmasi sebelum Reset
 function confirmResetGlobalScore() {
     Swal.fire({
         title: 'Reset Skor?',
         text: "Semua progres poin dan modul yang selesai akan dihapus!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#d33', // Merah
-        cancelButtonColor: '#6c757d', // Abu
+        confirmButtonColor: '#d33', 
+        cancelButtonColor: '#6c757d', 
         confirmButtonText: 'Ya, Reset!',
         cancelButtonText: 'Batal'
     }).then((result) => {
@@ -224,6 +247,6 @@ function resetGlobalScore() {
         'Skor dan progres Anda telah dihapus.',
         'success'
     ).then(() => {
-         window.location.reload(); // Refresh halaman
+         window.location.reload(); 
     });
 }

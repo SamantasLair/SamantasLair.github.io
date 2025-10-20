@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function selectPaket(paketId) { 
+function selectPaket(paketId) {
     sessionStorage.setItem('selectedQuizId', paketId);
     window.location.href = 'quiz.html';
 }

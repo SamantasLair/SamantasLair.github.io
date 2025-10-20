@@ -22,7 +22,7 @@ body {
 header {
     text-align: center;
     padding: 30px;
-    background-color: #e63946;
+    background-color: #e63946; /* Warna merah */
     color: white;
 }
 
@@ -70,7 +70,7 @@ main {
 
 .paket-card h3 {
     margin-top: 0;
-    color: #e63946;
+    color: #e63946; /* Warna merah */
 }
 
 #quiz-container {
@@ -89,7 +89,7 @@ main {
 #progress-bar-full {
     height: 100%;
     width: 0%;
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Warna hijau */
     transition: width 0.3s ease;
 }
 
@@ -127,13 +127,13 @@ main {
 }
 
 .option-btn.correct {
-    background-color: #d4edda;
+    background-color: #d4edda; /* Hijau muda */
     border-color: #c3e6cb;
     color: #155724;
 }
 
 .option-btn.incorrect {
-    background-color: #f8d7da;
+    background-color: #f8d7da; /* Merah muda */
     border-color: #f5c6cb;
     color: #721c24;
 }
@@ -144,7 +144,7 @@ main {
     font-size: 1rem;
     font-weight: bold;
     color: white;
-    background-color: #e63946;
+    background-color: #e63946; /* Warna merah */
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -155,7 +155,7 @@ main {
 }
 
 .btn:hover {
-    background-color: #c9303c;
+    background-color: #c9303c; /* Merah lebih gelap */
 }
 
 #result-container {
@@ -165,7 +165,7 @@ main {
 
 #score-text {
     font-size: 3rem;
-    color: #4CAF50;
+    color: #4CAF50; /* Warna hijau */
     margin: 10px 0 20px 0;
 }
 

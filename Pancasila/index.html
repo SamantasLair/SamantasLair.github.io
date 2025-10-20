@@ -3,45 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inovasi Pembelajaran Pancasila</title>
+    <title>Inovasi Pembelajaran Pancasila - Beranda</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="navbar-container">
+    <nav class="navbar-top">
+        <div class="container navbar-container">
             <div class="navbar-brand">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Garuda_Pancasila_vector.svg" alt="Logo Garuda" class="logo-nav">
-                <span>Inovasi Pancasila</span>
+                <span>Inovasi Pembelajaran Pancasila</span>
+            </div>
+            
+            <div class="skor-global-container">
+                <span class="skor-label">POIN PRESTASI:</span>
+                <span id="skor-global-text">0</span>
+                <button id="reset-skor-btn" class="btn-kecil">Reset</button>
             </div>
         </div>
     </nav>
 
     <header class="hero-section">
         <div class="container">
-            <h1>Platform Edukasi Nilai-Nilai Pancasila</h1>
-            <p class="hero-subtitle">Sebuah prototipe inovasi untuk memperkuat pemahaman dan penerapan dasar negara melalui pembelajaran interaktif.</p>
+            <h1>Selamat Datang di Platform Edukasi Pancasila</h1>
+            <p class="hero-subtitle">Kontribusi nyata untuk masyarakat melalui produk inovasi sederhana dan pembelajaran interaktif.</p>
         </div>
     </header>
 
-    <section class="skor-section">
-        <div class="container">
-            <div class="skor-global-container">
-                <div class="skor-label">POIN PRESTASI ANDA</div>
-                <div id="skor-global-text">0</div>
-                <button id="reset-skor-btn" class="btn-kecil">Reset Poin</button>
-            </div>
-        </div>
-    </section>
-
     <main class="container paket-section">
         <h2>Pilih Modul Pembelajaran</h2>
-        <p class="paket-subtitle">Selesaikan setiap modul untuk mendapatkan poin dan membuka pemahaman baru.</p>
+        <p class="paket-subtitle">Silakan pilih modul yang tersedia di bawah ini. Modul yang telah selesai akan otomatis disembunyikan.</p>
         
         <div id="paket-list" class="paket-container">
             </div>
 
-        <div id="pagination-controls" class="pagination-controls">
+        <div id="pagination-controls" class="pagination-controls hidden">
             <button id="prev-btn" class="btn">Sebelumnya</button>
             <span id="page-info">Halaman 1 / 1</span>
             <button id="next-btn" class="btn">Selanjutnya</button>
@@ -50,7 +46,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 - Prototipe Inovasi Pancasila. Dibuat sebagai bagian dari kontribusi untuk masyarakat.</p>
+            <p>&copy; 2025 - Prototipe Inovasi Pancasila.</p>
         </div>
     </footer>
 

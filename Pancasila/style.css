@@ -4,10 +4,12 @@
     --merah-gelap: #B30000;
     --putih-utama: #FFFFFF;
     --latar-abu: #f4f7f6;
-    --teks-hitam: #212529;
+    --teks-hitam: #212529; /* Warna navbar atas */
     --teks-abu: #6c757d;
+    --teks-putih: #f8f9fa;
     --emas-garuda: #FFD700;
     --hijau-benar: #28a745;
+    --biru-poin: #007bff;
     --font-utama: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -29,37 +31,68 @@ body {
     padding: 0 20px;
 }
 
-/* --- 1. NAVBAR --- */
-.navbar {
-    background-color: var(--merah-utama);
-    color: var(--putih-utama);
+/* --- 1. NAVBAR ATAS BARU --- */
+.navbar-top {
+    background-color: var(--teks-hitam);
+    color: var(--teks-putih);
     padding: 12px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
 }
 .navbar-brand {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 600;
+    color: var(--putih-utama);
 }
 .logo-nav {
     width: 35px;
     height: auto;
 }
 
-/* --- 2. HERO SECTION --- */
+/* --- 2. SKOR DI NAVBAR --- */
+.skor-global-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.skor-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #adb5bd; /* Abu-abu muda agar tidak terlalu mencolok */
+}
+#skor-global-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--putih-utama);
+    background-color: var(--biru-poin); /* Biru seperti di referensi */
+    padding: 5px 12px;
+    border-radius: 8px;
+    min-width: 30px;
+    text-align: center;
+}
+.btn-kecil {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--teks-hitam);
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.btn-kecil:hover {
+    background-color: #dee2e6;
+}
+
+/* --- 3. HERO SECTION --- */
 .hero-section {
     background-color: var(--putih-utama);
     text-align: center;
@@ -79,50 +112,6 @@ body {
     margin: 0 auto;
 }
 
-/* --- 3. SKOR SECTION --- */
-.skor-section {
-    background-color: var(--latar-abu);
-    padding: 30px 0;
-    border-bottom: 1px solid #dee2e6;
-}
-.skor-global-container {
-    background-color: var(--putih-utama);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    padding: 25px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.skor-label {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--merah-utama);
-}
-#skor-global-text {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--teks-hitam);
-    margin-right: auto;
-    margin-left: 15px;
-}
-.btn-kecil {
-    padding: 10px 15px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--merah-utama);
-    background-color: #ffebeb;
-    border: 1px solid var(--merah-utama);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-.btn-kecil:hover {
-    background-color: #fadada;
-}
-
 /* --- 4. PAKET SECTION & KARTU --- */
 .paket-section {
     padding-top: 40px;
@@ -133,6 +122,7 @@ body {
     font-weight: 700;
     text-align: center;
     margin-bottom: 10px;
+    color: var(--merah-utama);
 }
 .paket-subtitle {
     text-align: center;
@@ -146,6 +136,19 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
+    min-height: 200px;
+}
+
+/* PESAN JIKA SEMUA SELESAI */
+.pesan-selesai {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--teks-abu);
+    text-align: center;
+    padding: 50px 20px;
+    background-color: var(--putih-utama);
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
 }
 
 .paket-card {
@@ -160,12 +163,12 @@ body {
     flex-direction: column;
     position: relative;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-    border-left: 5px solid #dee2e6;
+    border-left: 5px solid var(--merah-utama);
 }
 
 .paket-card:hover {
     transform: translateY(-5px);
-    border-left-color: var(--merah-utama);
+    border-left-color: var(--merah-gelap);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
 }
 
@@ -184,31 +187,11 @@ body {
     line-height: 1.5;
 }
 
+/* Kartu Selesai (Tidak digunakan lagi, karena disembunyikan) */
 .paket-card.selesai {
-    background-color: #f8f9fa;
-    border-color: #dee2e6;
-    border-left-color: var(--hijau-benar);
-    cursor: not-allowed;
-    opacity: 0.8;
+    display: none; 
 }
 
-.paket-card.selesai:hover {
-    transform: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-}
-
-.paket-card.selesai::after {
-    content: '✓ Selesai';
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    background-color: var(--hijau-benar);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 0 10px 0 10px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
 
 /* --- 5. FOOTER --- */
 .footer {
@@ -217,6 +200,7 @@ body {
     padding: 30px 0;
     text-align: center;
     font-size: 0.9rem;
+    margin-top: 40px;
 }
 
 /* --- TOMBOL-TOMBOL --- */
@@ -376,27 +360,25 @@ body {
 }
 
 .anim-fade-in-up {
-    opacity: 0; /* Mulai transparan */
+    opacity: 0;
     animation: fadeInUp 0.4s ease-out forwards;
 }
 
-/* Penyesuaian Media Query untuk Mobile */
+/* --- Media Queries --- */
 @media (max-width: 900px) {
     .paket-container {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    .skor-label {
+        display: none;
     }
 }
 @media (max-width: 600px) {
     .paket-container {
         grid-template-columns: repeat(1, 1fr);
-    }
-    .skor-global-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    #skor-global-text {
-        margin-left: 0;
-        margin-bottom: 15px;
     }
     .hero-section h1 {
         font-size: 2rem;
